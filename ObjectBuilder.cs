@@ -25,12 +25,8 @@ namespace GameBuilder{
         public virtual void Update(){
 //            depth = (1/Position.Y+1)/2;
             depth = (-Position.Y-Position.X/2)/10000+1;
-            if(!double.IsNaN(acceleration.X) && !double.IsNaN(acceleration.Y)){
-                speed += acceleration;
-            }
-
             if(!double.IsNaN(speed.X) && !double.IsNaN(speed.Y)){
-                Position += speed;
+                Position += speed += acceleration;
             }
         }
         public virtual void Draw(SpriteBatch sprBt){
