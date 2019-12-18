@@ -12,9 +12,18 @@ namespace GameBuilder{
         }
 
         protected override void Initialize(){
-            Sprite = Content.Load<Texture2D>("Sprite");
-
             base.Initialize();
         }
+
+        protected override void LoadContent(){
+            Sprite = Content.Load<Texture2D>("Sprite");
+        }
+        protected override void Update(GameTime gameTime){
+            base.Update(gameTime);
+        }
+        protected override void Draw(GameTime gameTime){
+            base.Draw(gameTime);
+        }
+
     }
 }

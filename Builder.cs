@@ -15,7 +15,7 @@ namespace GameBuilder{
         public static Vector2 CalculateVectorSpeed(float speed, float direction){
             return new Vector2((float) CalculateHspeed(speed, direction),(float) CalculateVspeed(speed, direction));
         }
-		public static double CalculateDirection(float Hspeed,float Vspeed) {
+        public static double CalculateDirection(float Hspeed,float Vspeed) {
             if (Vspeed > 0){
                 return (Math.Asin(Hspeed / CalculateSpeed(Hspeed, Vspeed)) / Math.PI * 180) + 90;
             }else{
@@ -33,7 +33,7 @@ namespace GameBuilder{
 		}
 
 	    public static void DrawRectangle(SpriteBatch sprBt, Rectangle rec, Color color){
-		    sprBt.Draw(Sprite, new Vector2(rec.X, rec.Y),rec,color,0,new Vector2(0,0),new Vector2(rec.Width/128f, rec.Height/128f), SpriteEffects.None,0);
+		    sprBt.Draw(Sprite, new Vector2(rec.X, rec.Y), null, color, 0, new Vector2(0, 0), new Vector2(rec.Width, rec.Height), SpriteEffects.None, 0);
 	    }
         public static void  DrawLine(SpriteBatch sprBt, Vector2 pos, Vector2 otherPos, float size, Color color){
             float s = (float)(CalculateDistance(pos, otherPos));
@@ -55,6 +55,35 @@ namespace GameBuilder{
             angle = (angle+(float)Math.PI/2) % ((float)Math.PI*2) - (float)Math.PI;
             angle = Math.Abs(angle)*2/(float)Math.PI-1;
             return angle;
+        }
+        public static Vector2 Follow(Vector2 followerPos, Vector2 position, float hitboxSize, float maxSpeed){
+			if(CalculateDistance(position, followerPos) > hitboxSize && (position.X != followerPos.X && position.Y != followerPos.Y)){
+            	float dir = (float) CalculateAngle(position, followerPos);
+                Vector2 spd = new Vector2();
+                if(position.X != followerPos.X){
+                    spd.X = (float)CalculateHspeed(maxSpeed, dir);
+                }
+                else{
+                    spd.X = 0;
+                }
+                if(position.Y != followerPos.Y){
+                    spd.Y = (float)CalculateVspeed(maxSpeed, dir);
+                }else{
+                    spd.Y = 0;
+                }
+                return spd;
+			}else{
+				return Vector2.Zero;
+			}
+		}
+        public static bool IsCollision(Rectangle hitbox, Rectangle other, Vector2 speed){
+            return new Rectangle(hitbox.X+(int)speed.X, hitbox.Y+(int)speed.Y, hitbox.Width, hitbox.Height).Intersects(other);
+        }
+        public static bool IsCollisionX(Rectangle hitbox, Rectangle other, Vector2 speed){
+            return new Rectangle(hitbox.X+(int)speed.X, hitbox.Y, hitbox.Width, hitbox.Height).Intersects(other);
+        }
+        public static bool IsCollisionY(Rectangle hitbox, Rectangle other, Vector2 speed){
+            return new Rectangle(hitbox.X, hitbox.Y+(int)speed.Y, hitbox.Width, hitbox.Height).Intersects(other);
         }
     }
 }
