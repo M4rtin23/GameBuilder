@@ -23,8 +23,7 @@ namespace GameBuilder{
 			
         }
         public virtual void Update(){
-//            depth = (1/Position.Y+1)/2;
-            depth = (-Position.Y-Position.X/2)/10000+1;
+            depth = (1/Position.Y+1)/2;
             if(!double.IsNaN(speed.X) && !double.IsNaN(speed.Y)){
                 Position += speed += acceleration;
             }
@@ -42,5 +41,19 @@ namespace GameBuilder{
         protected virtual void stripToSprite(int frameNumb){
             rectangle = new Rectangle((int)imageIndex*SpriteIndex.Width/frameNumb, 0, SpriteIndex.Width/frameNumb, SpriteIndex.Height);
         }
+        protected bool PreCollision(Rectangle rec){
+            return new Rectangle(Hitbox.Location + (speed*2).ToPoint(), Hitbox.Size).Intersects(rec);
+        }
+        protected bool PreCollisionX(Rectangle rec){
+            Rectangle r = Hitbox;
+            r.X += (int)speed.X*2;
+            return r.Intersects(rec);
+        }
+        protected bool PreCollisionY(Rectangle rec){
+            Rectangle r = Hitbox;
+            r.Y += (int)speed.Y*2;
+            return r.Intersects(rec);
+        }
+
     }
 }

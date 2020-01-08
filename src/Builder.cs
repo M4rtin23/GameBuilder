@@ -33,8 +33,12 @@ namespace GameBuilder{
 		}
 
 	    public static void DrawRectangle(SpriteBatch sprBt, Rectangle rec, Color color){
-		    sprBt.Draw(Sprite, new Vector2(rec.X, rec.Y), null, color, 0, new Vector2(0, 0), new Vector2(rec.Width, rec.Height), SpriteEffects.None, 0);
+		    sprBt.Draw(Sprite, new Vector2(rec.X, rec.Y), null, color, 0, new Vector2(0, 0), new Vector2(rec.Width, rec.Height), SpriteEffects.None, 0.9f);
 	    }
+		public static void DrawRectangle(SpriteBatch sprBt, Vector2 pos, Color color){
+		    sprBt.Draw(Sprite, pos, null, color, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.9f);
+	    }
+
         public static void  DrawLine(SpriteBatch sprBt, Vector2 pos, Vector2 otherPos, float size, Color color){
             float s = (float)(CalculateDistance(pos, otherPos));
             float r = (float)(-CalculateAngle(pos, otherPos) * Math.PI/180);
