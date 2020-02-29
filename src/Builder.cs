@@ -45,7 +45,6 @@ namespace GameBuilder{
             sprBt.Draw(Sprite, pos, null, color, r, new Vector2(0 ,0.5f), new Vector2(s, size), SpriteEffects.None, 0);
         }
         public static void DrawTriangle(SpriteBatch sprBt, Vector2 A, Vector2 B, Vector2 C){
-//            Rectangle r = new Rectangle((int)A.X,(int) A.Y, 0, (int)CalculateDistance(A, B));
             DrawLine(sprBt, A, B, 2, Color.White);
             DrawLine(sprBt, A, C, 2, Color.White);
             DrawLine(sprBt, B, C, 2, Color.White);
