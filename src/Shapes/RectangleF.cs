@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using static GameBuilder.Game1;
 
 namespace GameBuilder{
-    public class RectangleF : Shape{
+	public class RectangleF : Shape{
 		public float X, Y, Width, Height;
 		public float Top{get => Y;}
 		public float Bottom{get => Y + Height;}
@@ -21,9 +21,9 @@ namespace GameBuilder{
 		public bool IsEmpty{get => this.MemberwiseClone() == RectangleF.Empty;}
 
 
-	    public RectangleF(){
+		public RectangleF(){
 		}
-	    public RectangleF(Rectangle rectangle){
+		public RectangleF(Rectangle rectangle){
 			X = rectangle.X;
 			Y = rectangle.Y;
 			Width = rectangle.Width;
@@ -76,11 +76,11 @@ namespace GameBuilder{
 		}
 */
 		public bool Intersects(RectangleF rectangle){
-            return rectangle.Left < Right &&
-                   Left < rectangle.Right &&
-                   rectangle.Top < Bottom &&
-                   Top < rectangle.Bottom;
-        }
+			return rectangle.Left < Right &&
+				   Left < rectangle.Right &&
+				   rectangle.Top < Bottom &&
+				   Top < rectangle.Bottom;
+		}
 		public bool checktri(Triangle triangle){
 			bool a = false;
 			for(float x = X; x < Right; x++){
@@ -100,32 +100,32 @@ namespace GameBuilder{
 					checktri(triangle);
 		}		
 		public bool Contains(Vector2 value){
-            return ((((this.X <= value.X) && (value.X < (this.X + this.Width))) && (this.Y <= value.Y)) && (value.Y < (this.Y + this.Height)));
-        }
+			return ((((this.X <= value.X) && (value.X < (this.X + this.Width))) && (this.Y <= value.Y)) && (value.Y < (this.Y + this.Height)));
+		}
 		public void Inflate(float horizontalAmount, float verticalAmount){
-            X -= horizontalAmount;
-            Y -= verticalAmount;
-            Width += horizontalAmount * 2;
-            Height += verticalAmount * 2;
-        }
+			X -= horizontalAmount;
+			Y -= verticalAmount;
+			Width += horizontalAmount * 2;
+			Height += verticalAmount * 2;
+		}
 		public static RectangleF Inflate(float horizontalAmount, float verticalAmount, RectangleF rectangle){
-            rectangle.X -= horizontalAmount;
-            rectangle.Y -= verticalAmount;
-            rectangle.Width += horizontalAmount * 2;
-            rectangle.Height += verticalAmount * 2;
+			rectangle.X -= horizontalAmount;
+			rectangle.Y -= verticalAmount;
+			rectangle.Width += horizontalAmount * 2;
+			rectangle.Height += verticalAmount * 2;
 			return rectangle;
-        }
+		}
 		public void Offset(float offsetX, float offsetY){
-            X += offsetX;
-            Y += offsetY;
-        }
+			X += offsetX;
+			Y += offsetY;
+		}
 		public Rectangle ToRectangle(){
 			return new Rectangle(Location.ToPoint(), Size.ToPoint());
 		}
 
 
 		public void Draw(SpriteBatch sprBt){
-		    sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
 		}
-    }
+	}
 }

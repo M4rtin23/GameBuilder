@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using static GameBuilder.Game1;
 
 namespace GameBuilder{
-    public class Triangle : Shape{
+	public class Triangle : Shape{
 		public Vector2[] Vertices;
 		public Color Color;
 		public int Size;
@@ -25,7 +25,7 @@ namespace GameBuilder{
 				line.SetDepth(depth);
 				line.Draw(sprBt);
 			}
-        }
+		}
 
 		public bool Intersects(RectangleF rectangle){
 			return  rectangle.Contains(Vertices[0])                     ||
@@ -49,7 +49,7 @@ namespace GameBuilder{
 			return a;
 		}		
 
-        public bool Contains(Vector2 pos){
+		public bool Contains(Vector2 pos){
 			float[] y = new float[2];
 			bool isFull = false;
 			for(int i = 0; i < 3; i++){
@@ -76,6 +76,6 @@ namespace GameBuilder{
 			}
 			isFull = false;
 			return (pos.Y > y[0] && pos.Y < y[1]);
-        }
-    }
+		}
+	}
 }

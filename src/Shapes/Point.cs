@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using static GameBuilder.Game1;
 
 namespace GameBuilder{
-    public class Point : Shape{
+	public class Point : Shape{
 		Vector2 position;
 		int size;
 		public Point(Vector2 position){
@@ -19,7 +19,7 @@ namespace GameBuilder{
 			this.size = size;
 		}
 		public void Draw(SpriteBatch sprBt){
-		    sprBt.Draw(Sprite, position, null, color, 0, new Vector2(0.5f, 0.5f), size, SpriteEffects.None, depth);
+			sprBt.Draw(Sprite, position, null, color, 0, new Vector2(0.5f, 0.5f), size, SpriteEffects.None, depth);
 		}
-    }
+	}
 }

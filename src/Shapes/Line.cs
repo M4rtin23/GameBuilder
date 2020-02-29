@@ -6,7 +6,7 @@ using static GameBuilder.Game1;
 using static GameBuilder.Builder;
 
 namespace GameBuilder{
-    public class Line : Shape{
+	public class Line : Shape{
 		Vector2[] points;
 		int size;
 
@@ -53,10 +53,10 @@ namespace GameBuilder{
 			}
 		}
 
-        public void Draw(SpriteBatch sprBt){
-            float lenght = (float)(CalculateDistance(points[0], points[1]));
-            float rotation = (float)(-CalculateAngle(points[0], points[1]) * Math.PI/180);
-            sprBt.Draw(Sprite, points[0], null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
-        }
-    }
+		public void Draw(SpriteBatch sprBt){
+			float lenght = (float)(CalculateDistance(points[0], points[1]));
+			float rotation = (float)(-CalculateAngle(points[0], points[1]) * Math.PI/180);
+			sprBt.Draw(Sprite, points[0], null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
+		}
+	}
 }

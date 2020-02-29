@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using static GameBuilder.Game1;
 
 namespace GameBuilder{
-    public class Motion{
+	public class Motion{
 		public Vector2 speed;
 		float direction;
 		float spd;
@@ -32,18 +32,18 @@ namespace GameBuilder{
 		}
 		public void CalculateSpeedX(){
 			speed.X = (float)Math.Cos(direction) * spd;
-        }
-        public void CalculateVectorSpeed(){
+		}
+		public void CalculateVectorSpeed(){
 			CalculateSpeedX();
 			CalculateSpeedY();
 		}
-        public void CalculateDirection() {
-            if (speed.Y > 0){
-                direction = (float)(Math.Asin(speed.X / spd) + Math.PI/2);
-            }else{
-                direction = (float)(Math.Acos(speed.X / spd) + Math.PI);
-            }
-        }
+		public void CalculateDirection() {
+			if (speed.Y > 0){
+				direction = (float)(Math.Asin(speed.X / spd) + Math.PI/2);
+			}else{
+				direction = (float)(Math.Acos(speed.X / spd) + Math.PI);
+			}
+		}
 		public void CalculateSpeed() {
 			spd = (float)speed.Length();
 		}
@@ -60,5 +60,5 @@ namespace GameBuilder{
 			return direction;
 		}
 
-    }
+	}
 }
