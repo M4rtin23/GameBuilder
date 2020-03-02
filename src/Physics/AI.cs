@@ -17,12 +17,12 @@ namespace GameBuilder{
 			return (Position - position).Length();
 		}
 		public float CalculateAngle(Vector2 position){
-			return new Motion(Position - position).GetDirDegrees();
+			return new Motion(Position - position).Degrees;
 		}
 		public Vector2 Follow(Vector2 position, float maxDistance){
 			if(CalculateDistance(position) > maxDistance && (position.X != Position.X && position.Y != Position.Y)){
 				float dir = (float) CalculateAngle(position);
-				return new Motion(maxSpeed, dir).GetVectorSpeed();
+				return new Motion(maxSpeed, dir).Speed;
 			}else{
 				return Vector2.Zero;
 			}
