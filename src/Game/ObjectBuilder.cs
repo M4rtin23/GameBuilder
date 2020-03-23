@@ -23,7 +23,7 @@ namespace GameBuilder{
 			scale = new Vector2(1, 1);
 		}
 		public virtual void Update(){
-			depth = (1/Position.Y+1)/2;
+			depth = (-Position.Y / (2 * MapLimit)) + 0.5f;
 			if(!double.IsNaN(speed.X) && !double.IsNaN(speed.Y)){
 				Position += speed += acceleration;
 			}
@@ -54,5 +54,29 @@ namespace GameBuilder{
 			r.Y += speed.Y;
 			return r.Intersects(rec);
 		}
+		protected void collision(ObjectBuilder[] entities){
+			for(int i = 0; i<entities.Length; i++){
+				if(entities[i] != null){
+					if(PreCollisionX(entities[i].Hitbox) ){
+						speed.X = 0;
+					}
+					if(PreCollisionY(entities[i].Hitbox) ){
+						speed.Y = 0;
+					}
+				}
+			}
+		}
+		protected void collision0(ObjectBuilder[] entities){
+			for(int i = 0; i < entities.Length; i++){
+				if(entities[i] != null){
+					if(PreCollision(entities[i].Hitbox) ){
+						Motion a = new Motion(speed);
+						a.Degrees += 90;
+						speed = a.Speed;
+					}
+				}
+			}
+		}
+		
 	}
 }

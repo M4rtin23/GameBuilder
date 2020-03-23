@@ -6,59 +6,46 @@ using static GameBuilder.Game1;
 
 namespace GameBuilder{
 	public class Motion{
-		public Vector2 speed;
+		public Vector2 Speed;
+		public float Radians{get => direction; set => direction = value;}
+		public float Degrees{get => MathHelper.ToDegrees(direction); set { direction = MathHelper.ToRadians(value); CalculateVectorSpeed();}}
 		float direction;
-		float spd;
+		float speed;
+		public float MaxSpeed{get => Speed.Length(); set => speed = value;}
 
 		public Motion(Vector2 speed){
-			this.speed = speed;
-			CalculateSpeed();
+			this.Speed = speed;
+			this.speed = MaxSpeed;
 			CalculateDirection();
 		}
-		public Motion(float spd, int degreeDir){
-			this.spd = spd;
+		public Motion(float speed, int degreeDir){
+			this.speed = speed;
 			direction = MathHelper.ToRadians(degreeDir);
 			CalculateVectorSpeed();
 		}
-		public Motion(float spd, float radianDir){
-			this.spd = spd;
+		public Motion(float speed, float radianDir){
+			this.speed = speed;
 			direction = radianDir;
 			CalculateVectorSpeed();
 		}
 
 
 		public void CalculateSpeedY() {
-			speed.Y = (float)Math.Sin(-direction) * spd;
+			Speed.Y = (float)Math.Sin(-direction) * speed;
 		}
 		public void CalculateSpeedX(){
-			speed.X = (float)Math.Cos(direction) * spd;
+			Speed.X = (float)Math.Cos(direction) * speed;
 		}
 		public void CalculateVectorSpeed(){
 			CalculateSpeedX();
 			CalculateSpeedY();
 		}
 		public void CalculateDirection() {
-			if (speed.Y > 0){
-				direction = (float)(Math.Asin(speed.X / spd) + Math.PI/2);
+			if (Speed.Y > 0){
+				direction = (float)(Math.Asin(Speed.X / speed) + Math.PI/2);
 			}else{
-				direction = (float)(Math.Acos(speed.X / spd) + Math.PI);
+				direction = (float)(Math.Acos(Speed.X / speed) + Math.PI);
 			}
 		}
-		public void CalculateSpeed() {
-			spd = (float)speed.Length();
-		}
-		public Vector2 GetVectorSpeed(){
-			return speed;
-		}
-		public float GetSpeed(){
-			return spd;
-		}
-		public float GetDirDegrees(){
-			return MathHelper.ToDegrees(direction);
-		}
-		public float GetDirRadians(){
-			return direction;
-		}
-
 	}
 }
