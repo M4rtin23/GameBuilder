@@ -17,7 +17,7 @@ namespace GameBuilder{
 			return (Position - position).Length();
 		}
 		public float CalculateAngle(Vector2 position){
-			return new Motion(Position - position).Degrees;
+			return new Motion(Position - position).Radians;
 		}
 		public Vector2 Follow(Vector2 position, float maxDistance){
 			if(CalculateDistance(position) > maxDistance && (position.X != Position.X && position.Y != Position.Y)){
