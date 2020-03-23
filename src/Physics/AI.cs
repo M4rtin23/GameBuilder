@@ -27,5 +27,8 @@ namespace GameBuilder{
 				return Vector2.Zero;
 			}
 		}
+		public Vector2 Follow(Vector2 position){
+			return Follow(position, 0);
+		}
 	}
 }
