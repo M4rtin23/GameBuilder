@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static GameBuilder.Game1;
+using static GameBuilder.GameBase;
 
 namespace GameBuilder{
 	public class ObjectBuilder{
@@ -22,38 +22,47 @@ namespace GameBuilder{
 			origin  = new Vector2(0, 0);
 			scale = new Vector2(1, 1);
 		}
+
 		public virtual void Update(){
 			depth = (-Position.Y / (2 * MapLimit)) + 0.5f;
 			if(!double.IsNaN(speed.X) && !double.IsNaN(speed.Y)){
 				Position += speed += acceleration;
 			}
 		}
+
 		public virtual void Draw(SpriteBatch sprBt){
 			sprBt.Draw(SpriteIndex, Position, rectangle.ToRectangle(), color, rot, origin, scale, effect, depth);
 		}
+
 		protected virtual void animationImage(int frameNumb){
 			imageIndex += animationSpeed;
 			imageIndex = imageIndex % frameNumb;
 		}
+
 		protected virtual void center(int frameNumb){
 			origin = new Vector2(SpriteIndex.Width/(2*frameNumb), SpriteIndex.Height/2);
 		}
+
 		protected virtual void stripSprite(int frameNumb){
 			rectangle = new RectangleF((int)imageIndex*SpriteIndex.Width/frameNumb, 0, SpriteIndex.Width/frameNumb, SpriteIndex.Height);
 		}
+
 		protected bool PreCollision(RectangleF rec){
 			return new RectangleF(Hitbox.Location + (speed*2), Hitbox.Size).Intersects(rec);
 		}
+
 		protected bool PreCollisionX(RectangleF rec){
 			RectangleF r = new RectangleF(Hitbox.Location, Hitbox.Size);
 			r.X += speed.X;
 			return r.Intersects(rec);
 		}
+
 		protected bool PreCollisionY(RectangleF rec){
 			RectangleF r = new RectangleF(Hitbox.Location, Hitbox.Size);
 			r.Y += speed.Y;
 			return r.Intersects(rec);
 		}
+
 		protected void collision(ObjectBuilder[] entities){
 			for(int i = 0; i<entities.Length; i++){
 				if(entities[i] != null){
@@ -66,6 +75,7 @@ namespace GameBuilder{
 				}
 			}
 		}
+
 		protected void collision0(ObjectBuilder[] entities){
 			for(int i = 0; i < entities.Length; i++){
 				if(entities[i] != null){
@@ -77,6 +87,5 @@ namespace GameBuilder{
 				}
 			}
 		}
-		
 	}
 }

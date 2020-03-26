@@ -2,29 +2,24 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using static GameBuilder.Game1;
+using static GameBuilder.GameBase;
 
 namespace GameBuilder{
 	public class Triangle : Shape{
 		public Vector2[] Vertices;
 		public Color Color;
 		public int Size;
+
 		public Triangle(Vector2 a, Vector2 b, Vector2 c){
 			Vertices = new Vector2[]{a, b, c};
 			Color = Color.White;
 			Size = 2;
 		}
+
 		public Triangle(Vector2 a, Vector2 b, Vector2 c, int size, Color color){
 			Vertices = new Vector2[]{a, b, c};
 			Color = color;
 			Size = size;
-		}
-		public void Draw(SpriteBatch sprBt){
-			for(int i = 0; i < 3; i++){
-				Line line = new Line(Vertices[i], Vertices[(i+1)%3], Size, Color);
-				line.SetDepth(depth);
-				line.Draw(sprBt);
-			}
 		}
 
 		public bool Intersects(RectangleF rectangle){
@@ -35,6 +30,7 @@ namespace GameBuilder{
 					Contains(new Vector2(rectangle.X, rectangle.Bottom))||
 					rectangle.checktri(new Triangle(Vertices[0],Vertices[1],Vertices[2]));
 		}
+
 		public bool Intersects(Triangle triangle){
 			bool a = false;
 			for(int i = 0; i < 3; i++){
@@ -77,5 +73,33 @@ namespace GameBuilder{
 			isFull = false;
 			return (pos.Y > y[0] && pos.Y < y[1]);
 		}
+
+		public void Draw(SpriteBatch sprBt){
+			for(int i = 0; i < 3; i++){
+				Line.Draw(sprBt, Vertices[i], Vertices[(i+1)%3], Size, Color, depth);
+			}
+		}
+
+		#region static
+		
+		public static void Draw(SpriteBatch sprBt, Vector2[] vertices, int size, Color color, float depth){
+			for(int i = 0; i < 3; i++){
+				Line.Draw(sprBt, vertices[i], vertices[(i+1)%3], size, color, depth);
+			}
+		}
+
+		public static void Draw(SpriteBatch sprBt, Vector2[] vertices, int size, Color color){
+			for(int i = 0; i < 3; i++){
+				Line.Draw(sprBt, vertices[i], vertices[(i+1)%3], size, color, 0);
+			}
+		}
+
+		public static void Draw(SpriteBatch sprBt, Vector2[] vertices){
+			for(int i = 0; i < 3; i++){
+				Line.Draw(sprBt, vertices[i], vertices[(i+1)%3], 4, Color.White, 0);
+			}
+		}
+
+		#endregion
 	}
 }

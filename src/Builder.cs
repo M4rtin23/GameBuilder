@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using static GameBuilder.Game1;
+using static GameBuilder.GameBase;
 
 namespace GameBuilder{
 	public class Builder{

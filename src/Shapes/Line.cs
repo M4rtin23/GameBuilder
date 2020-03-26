@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using static GameBuilder.Game1;
+using static GameBuilder.GameBase;
 using static GameBuilder.Builder;
 
 namespace GameBuilder{
@@ -15,15 +15,18 @@ namespace GameBuilder{
 			color = Color.White;
 			size = 4;
 		}
+
 		public Line(Vector2 a, Vector2 b, int size, Color color){
 			points = new Vector2[]{a, b};
 			this.color = color;
 			this.size = size;
 		}
+
 		public float Ratio(){
 			Vector2 a = points[0] - points[1];
 			return (a.Y)/(a.X);
 		}
+
 		public Vector2 Position(){
 			float x, y;
 			if(points[0].X < points[1].X){
@@ -38,6 +41,7 @@ namespace GameBuilder{
 			}
 			return new Vector2(x, y);
 		}
+
 		public Vector2 Min(){
 			if(points[0].X < points[1].X){
 				return points[0];
@@ -45,6 +49,7 @@ namespace GameBuilder{
 				return points[1];	
 			}
 		}
+
 		public Vector2 Max(){
 			if(points[0].X < points[1].X){
 				return points[1];
@@ -58,5 +63,21 @@ namespace GameBuilder{
 			float rotation = (float)(-CalculateAngle(points[0], points[1]) * Math.PI/180);
 			sprBt.Draw(Sprite, points[0], null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
 		}
+
+		#region static
+
+		public static void Draw(SpriteBatch sprBt, Vector2 point0, Vector2 point1, int size, Color color){
+			float lenght = (float)(CalculateDistance(point0, point1));
+			float rotation = (float)(-CalculateAngle(point0, point1) * Math.PI/180);
+			sprBt.Draw(Sprite, point0, null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, 0);
+		}
+
+		public static void Draw(SpriteBatch sprBt, Vector2 point0, Vector2 point1, int size, Color color, float depth){
+			float lenght = (float)(CalculateDistance(point0, point1));
+			float rotation = (float)(-CalculateAngle(point0, point1) * Math.PI/180);
+			sprBt.Draw(Sprite, point0, null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
+		}
+
+		#endregion
 	}
 }
