@@ -46,7 +46,27 @@ namespace GameBuilder{
 			Height = size.Y;
 			color = Color.White;
 		}
-
+		public RectangleF(float size){
+			X = -size/2;
+			Y = -size/2;
+			Width = size;
+			Height = size;
+			color = Color.White;
+		}
+		public RectangleF(float x, float y, float size){
+			X = x;
+			Y = y;
+			Width = size;
+			Height = size;
+			color = Color.White;
+		}
+		public RectangleF(Vector2 location, float size){
+			X = location.X;
+			Y = location.Y;
+			Width = size;
+			Height = size;
+			color = Color.White;
+		}
 		public RectangleF(float x, float y, float width, float height){
 			this.X = x;
 			this.Y = y;
@@ -127,6 +147,10 @@ namespace GameBuilder{
 		}
 
 		public void Draw(SpriteBatch sprBt){
+			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+		}
+		public void Draw(SpriteBatch sprBt, float depth){
+			this.depth = depth;
 			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
 		}
 

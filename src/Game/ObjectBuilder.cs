@@ -15,6 +15,7 @@ namespace GameBuilder{
 		protected float rot = 0, maxSpeed;
 		protected Color color = Color.White;
 		private float depth;
+		protected int alpha = 255;
 
 		public ObjectBuilder(){
 			SpriteIndex = Sprite;
@@ -24,14 +25,14 @@ namespace GameBuilder{
 		}
 
 		public virtual void Update(){
-			depth = (-Position.Y / (2 * MapLimit)) + 0.5f;
+			depth = (-Position.Y / (MapLimit+1)) + 0.5f;
 			if(!double.IsNaN(speed.X) && !double.IsNaN(speed.Y)){
 				Position += speed += acceleration;
 			}
 		}
 
 		public virtual void Draw(SpriteBatch sprBt){
-			sprBt.Draw(SpriteIndex, Position, rectangle.ToRectangle(), color, rot, origin, scale, effect, depth);
+			sprBt.Draw(SpriteIndex, Position, rectangle.ToRectangle(), new Color(alpha*2-color.R ,alpha*2-color.G, alpha*2-color.B, alpha*2-255), rot, origin, scale, effect, depth);
 		}
 
 		protected virtual void animationImage(int frameNumb){
@@ -65,11 +66,11 @@ namespace GameBuilder{
 
 		protected void collision(ObjectBuilder[] entities){
 			for(int i = 0; i<entities.Length; i++){
-				if(entities[i] != null){
-					if(PreCollisionX(entities[i].Hitbox) ){
+				if(entities[i] != null && entities[i].Position != Position){
+					if(PreCollisionX(entities[i].Hitbox)){
 						speed.X = 0;
 					}
-					if(PreCollisionY(entities[i].Hitbox) ){
+					if(PreCollisionY(entities[i].Hitbox)){
 						speed.Y = 0;
 					}
 				}
@@ -78,8 +79,8 @@ namespace GameBuilder{
 
 		protected void collision0(ObjectBuilder[] entities){
 			for(int i = 0; i < entities.Length; i++){
-				if(entities[i] != null){
-					if(PreCollision(entities[i].Hitbox) ){
+				if(entities[i] != null && entities[i].Position != Position){
+					if(PreCollision(entities[i].Hitbox)){
 						Motion a = new Motion(speed);
 						a.Degrees += 90;
 						speed = a.Speed;
