@@ -1,8 +1,7 @@
 using Microsoft.Xna.Framework;
-using GameBuilder;
 using static GameBuilder.GameBase;
 
-namespace VirtusPecto.Desktop{
+namespace GameBuilder{
 	public class Camera{
 		public static Vector2 Position;
 
