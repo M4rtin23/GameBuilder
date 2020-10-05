@@ -79,6 +79,20 @@ namespace GameBuilder{
 				Line.Draw(sprBt, Vertices[i], Vertices[(i+1)%3], Size, Color, depth);
 			}
 		}
+		public void Draw(GraphicsDevice graphicsDevice){
+		VertexPositionColor[] _vertexPositionColors = new VertexPositionColor[3];
+			BasicEffect _basicEffect;
+			for(int i = 0; i < 3; i++){
+				_vertexPositionColors[i] = new VertexPositionColor(new Vector3(Vertices[i], 0), Color);
+			}
+			_basicEffect = new BasicEffect(graphicsDevice);
+			_basicEffect.VertexColorEnabled = true;
+			_basicEffect.World = Matrix.CreateOrthographicOffCenter(0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height, 0, 0, 1);
+			_basicEffect.CurrentTechnique.Passes[0].Apply();
+		    graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, _vertexPositionColors, 0, 1);
+
+		}
+
 
 		#region static
 		
