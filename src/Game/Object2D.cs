@@ -5,8 +5,8 @@ using static GameBuilder.GameBase;
 namespace GameBuilder{
 	public class ObjectBuilder{
 		public Vector2 Position;
-		protected Vector2 speed, acceleration, origin, scale;
-		public Texture2D SpriteIndex;
+		protected Vector2 speed, acceleration, origin, scale = Vector2.One;
+		public Texture2D SpriteIndex = Sprite;
 		public RectangleF Hitbox = new RectangleF();
 		public RectangleF FastHitbox {get => new RectangleF(Position - origin*scale, rectangle.Size * scale);}
 		protected RectangleF rectangle = new RectangleF();
@@ -17,21 +17,22 @@ namespace GameBuilder{
 		private float depth;
 		protected int alpha = 255;
 
-		public ObjectBuilder(){
-			SpriteIndex = Sprite;
-			Position = new Vector2(1, 1);
-			origin  = new Vector2(0, 0);
-			scale = new Vector2(1, 1);
+		public ObjectBuilder(){}
+		public ObjectBuilder(Texture2D texture, Vector2 position, RectangleF rectangle, Vector2 origin){
+			SpriteIndex = texture;
+			Position = position;
+			this.rectangle = rectangle;
+			this.origin = origin;
 		}
 
 		public virtual void Update(){
-			depth = (-Position.Y / (MapLimit+1)) + 0.5f;
 			if(!double.IsNaN(speed.X) && !double.IsNaN(speed.Y)){
 				Position += speed += acceleration;
 			}
 		}
 
 		public virtual void Draw(SpriteBatch sprBt){
+			depth = (-Position.Y / (MapLimit+1)) + 0.5f;
 			sprBt.Draw(SpriteIndex, Position, rectangle.ToRectangle(), new Color(alpha*2-color.R ,alpha*2-color.G, alpha*2-color.B, alpha*2-255), rot, origin, scale, effect, depth);
 		}
 
@@ -64,7 +65,7 @@ namespace GameBuilder{
 			return r.Intersects(rec);
 		}
 
-		protected void collision(ObjectBuilder[] entities){
+		protected void userCollision(ObjectBuilder[] entities){
 			for(int i = 0; i<entities.Length; i++){
 				if(entities[i] != null && entities[i].Position != Position){
 					if(PreCollisionX(entities[i].Hitbox)){
@@ -77,13 +78,28 @@ namespace GameBuilder{
 			}
 		}
 
-		protected void collision0(ObjectBuilder[] entities){
+		protected void entityCollision0(ObjectBuilder[] entities){
 			for(int i = 0; i < entities.Length; i++){
 				if(entities[i] != null && entities[i].Position != Position){
-					if(PreCollision(entities[i].Hitbox)){
+					if(PreCollision(new RectangleF(entities[i].Hitbox.Location+speed,entities[i].Hitbox.Size))){
 						Motion a = new Motion(speed);
-						a.Degrees += 90;
+						a.Degrees += 90*((2*System.Convert.ToInt16(a.Radians < Motion.Angle(Position, entities[i].Position)))-1);
+						System.Console.WriteLine(a.Radians > Motion.Angle(Position, entities[i].Position));
 						speed = a.Speed;
+					}
+				}
+			}
+			entityCollision0(entities);
+		}
+
+		protected void entityCollision(ObjectBuilder[] entities){
+			for(int i = 0; i < entities.Length; i++){
+				if(entities[i] != null && entities[i].Position != Position){
+					if(PreCollisionX(entities[i].Hitbox)){
+						speed.X = 0;
+					}
+					if(PreCollisionY(entities[i].Hitbox)){
+						speed.Y = 0;
 					}
 				}
 			}
