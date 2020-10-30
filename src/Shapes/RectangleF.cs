@@ -153,6 +153,13 @@ namespace GameBuilder{
 			this.depth = depth;
 			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
 		}
+		public void Draw(SpriteBatch sprBt, Color color){
+			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+		}
+		public void Draw(SpriteBatch sprBt, Color color, float depth){
+			this.depth = depth;
+			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+		}
 
 		#region static
 		
