@@ -1,9 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using static GameBuilder.GameBase;
-using static GameBuilder.Builder;
 
 namespace GameBuilder{
 	public class Line : Shape{
@@ -59,22 +57,22 @@ namespace GameBuilder{
 		}
 
 		public void Draw(SpriteBatch sprBt){
-			float lenght = (float)(CalculateDistance(points[0], points[1]));
-			float rotation = (float)(-CalculateAngle(points[0], points[1]) * Math.PI/180);
+			float lenght = (points[0] - points[1]).Length();
+			float rotation = (float)(-Motion.Angle(points[0], points[1]) * Math.PI/180);
 			sprBt.Draw(Sprite, points[0], null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
 		}
 
 		#region static
 
 		public static void Draw(SpriteBatch sprBt, Vector2 point0, Vector2 point1, int size, Color color){
-			float lenght = (float)(CalculateDistance(point0, point1));
-			float rotation = (float)(-CalculateAngle(point0, point1) * Math.PI/180);
+			float lenght = (float)(Motion.Distance(point0, point1));
+			float rotation = (float)(-Motion.Angle(point0, point1) * Math.PI/180);
 			sprBt.Draw(Sprite, point0, null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, 0);
 		}
 
 		public static void Draw(SpriteBatch sprBt, Vector2 point0, Vector2 point1, int size, Color color, float depth){
-			float lenght = (float)(CalculateDistance(point0, point1));
-			float rotation = (float)(-CalculateAngle(point0, point1) * Math.PI/180);
+			float lenght = (float)(Motion.Distance(point0, point1));
+			float rotation = (float)(-Motion.Angle(point0, point1) * Math.PI/180);
 			sprBt.Draw(Sprite, point0, null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
 		}
 
