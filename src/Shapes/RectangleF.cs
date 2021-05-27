@@ -106,6 +106,13 @@ namespace GameBuilder{
 					break;
 				}
 			}
+			for(float y = Y; y < Right; y++){
+				if(triangle.Contains(new Vector2(X, y + 1))){
+					a = true;
+					break;
+				}
+			}
+
 			return a;
 		}
 

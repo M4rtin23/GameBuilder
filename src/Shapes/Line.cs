@@ -7,6 +7,11 @@ namespace GameBuilder{
 	public class Line : Shape{
 		Vector2[] points;
 		int size;
+		Vector2 vectorLine{get => points[0] - points[1];}
+		public float Slope{get=> (vectorLine.Y)/(vectorLine.X);}
+		public float Origin{get => points[0].Y-points[0].X*Slope;}
+		public Vector2 Min{get => points[Convert.ToInt16(points[0].X > points[1].X)];}
+		public Vector2 Max{get => points[Convert.ToInt16(points[0].X < points[1].X)];}
 
 		public Line(Vector2 a, Vector2 b){
 			points = new Vector2[]{a, b};
@@ -18,11 +23,6 @@ namespace GameBuilder{
 			points = new Vector2[]{a, b};
 			this.color = color;
 			this.size = size;
-		}
-
-		public float Ratio(){
-			Vector2 a = points[0] - points[1];
-			return (a.Y)/(a.X);
 		}
 
 		public Vector2 Position(){
@@ -40,20 +40,12 @@ namespace GameBuilder{
 			return new Vector2(x, y);
 		}
 
-		public Vector2 Min(){
-			if(points[0].X < points[1].X){
-				return points[0];
-			}else{
-				return points[1];	
-			}
+		public float Funtion(float x){
+			return Slope*(x-points[0].X)+points[0].Y;
 		}
-
-		public Vector2 Max(){
-			if(points[0].X < points[1].X){
-				return points[1];
-			}else{
-				return points[0];	
-			}
+		public bool Intersects(Line line){
+			float x = (Origin - line.Origin) / (line.Slope - Slope);			
+			return (Min.X < x && x < Max.X) && (line.Min.X < x && x < line.Max.X);
 		}
 
 		public void Draw(SpriteBatch sprBt){
