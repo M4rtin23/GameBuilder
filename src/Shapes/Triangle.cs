@@ -29,15 +29,6 @@ namespace GameBuilder{
 			Size = 2;
 		}
 
-		public bool Intersects(RectangleF rectangle){
-			return  rectangle.Contains(Vertices[0])                     ||
-					rectangle.Contains(Vertices[1])                     ||
-					rectangle.Contains(Vertices[2])                     ||
-					Contains(rectangle.Location + rectangle.Size)       ||
-					Contains(new Vector2(rectangle.X, rectangle.Bottom))||
-					rectangle.checktri(new Triangle(Vertices[0],Vertices[1],Vertices[2]));
-		}
-
 		public bool Intersects(Triangle triangle){
 			return linesIntersection(triangle) || IsVertexInside(triangle) || triangle.IsVertexInside(self);
 		}
@@ -54,6 +45,17 @@ namespace GameBuilder{
 			}
 			return false;
 		}
+
+		public bool Intersects(Line line){
+			for(int i = 0; i < 3; i++){
+				Line line2 = new Line(Vertices[i], Vertices[(i+1)%3]);
+				if(line.Intersects(line2)){
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public bool IsVertexInside(Triangle triangle){
 			for(int i = 0; i < 3; i++){
 				if(Contains(triangle.Vertices[i])){

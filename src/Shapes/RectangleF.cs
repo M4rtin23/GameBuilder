@@ -98,31 +98,14 @@ namespace GameBuilder{
 				   Top < rectangle.Bottom;
 		}
 
-		public bool checktri(Triangle triangle){
-			bool a = false;
-			for(float x = X; x < Right; x++){
-				if(triangle.Contains(new Vector2(x, Y + 1))){
-					a = true;
-					break;
-				}
-			}
-			for(float y = Y; y < Right; y++){
-				if(triangle.Contains(new Vector2(X, y + 1))){
-					a = true;
-					break;
-				}
-			}
-
-			return a;
-		}
-
 		public bool Intersects(Triangle triangle){
-			return  Contains(triangle.Vertices[0])            ||
-					Contains(triangle.Vertices[1])            ||
-					Contains(triangle.Vertices[2])            ||
-					triangle.Contains(Location + Size)        ||
-					triangle.Contains(new Vector2(X, Bottom)) ||
-					checktri(triangle);
+			return  Contains(triangle.Vertices[0])   					         	||
+					Contains(triangle.Vertices[1])            						||
+					Contains(triangle.Vertices[2])            						||
+					triangle.Contains(Location + Size)        						||
+					triangle.Contains(new Vector2(X, Bottom)) 						||
+					triangle.Intersects(new Line(Location, new Vector2(Right, Y)))	||
+					triangle.Intersects(new Line(Location, new Vector2(Right, Bottom)));
 		}	
 
 		public bool Contains(Vector2 value){
