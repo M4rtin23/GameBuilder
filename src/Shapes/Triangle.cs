@@ -1,15 +1,11 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using static GameBuilder.GameBase;
 
 namespace GameBuilder{
 	public class Triangle : Shape{
 		public Vector2[] Vertices;
 		public Color Color;
 		public int Size;
-		private Triangle self{get => new Triangle(Vertices);}
 
 		public Triangle(Vector2 a, Vector2 b, Vector2 c){
 			Vertices = new Vector2[]{a, b, c};
@@ -30,7 +26,7 @@ namespace GameBuilder{
 		}
 
 		public bool Intersects(Triangle triangle){
-			return linesIntersection(triangle) || IsVertexInside(triangle) || triangle.IsVertexInside(self);
+			return linesIntersection(triangle) || IsVertexInside(triangle) || triangle.IsVertexInside(new Triangle(Vertices));
 		}
 
 		private bool linesIntersection(Triangle triangle){
@@ -80,13 +76,13 @@ namespace GameBuilder{
 			int results = 0;
 			for(int i = 0; i < 3; i++){
 				Line line = new Line(Vertices[i], Vertices[(i+1)%3]);
-				if(line.Min.X < point.X && point.X < line.Max.X){
+				if(line.Min.X <= point.X && point.X <= line.Max.X){
 					float y = line.Funtion(point.X);
 					yValues[results] = y;
 					results++;
 				}
 			}
-			if(results == 0){
+			if(results < 2){
 				return false;
 			}
 			if(yValues[0] > yValues[1]){
@@ -94,7 +90,7 @@ namespace GameBuilder{
 				yValues[0] = yValues[1];
 				yValues[1] = switcher;
 			}
-			return yValues[0] < point.Y && point.Y < yValues[1];
+			return yValues[0] <= point.Y && point.Y <= yValues[1];
 		}
 
 		public void Draw(SpriteBatch sprBt){
