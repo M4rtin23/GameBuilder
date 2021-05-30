@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static GameBuilder.GameBase;
-
-namespace GameBuilder{
+using static GameBuilder.GameType.GameBase;
+using GameBuilder.Shapes;
+namespace GameBuilder.InGame{
 	public class ObjectBuilder{
 		public Vector2 Position;
 		protected Vector2 speed, acceleration, origin, scale = Vector2.One;
-		public Texture2D SpriteIndex = Sprite;
+		public Texture2D SpriteIndex;
 		public RectangleF Hitbox = new RectangleF();
 		public RectangleF FastHitbox {get => new RectangleF(Position - origin*scale, rectangle.Size * scale);}
 		protected RectangleF rectangle = new RectangleF();
@@ -17,7 +17,9 @@ namespace GameBuilder{
 		private float depth;
 		protected int alpha = 255;
 
-		public ObjectBuilder(){}
+		public ObjectBuilder(){
+			SpriteIndex = Shape.DefaultTexture;
+		}
 		public ObjectBuilder(Texture2D texture, Vector2 position, RectangleF rectangle, Vector2 origin){
 			SpriteIndex = texture;
 			Position = position;
@@ -31,9 +33,9 @@ namespace GameBuilder{
 			}
 		}
 
-		public virtual void Draw(SpriteBatch sprBt){
+		public virtual void Draw(SpriteBatch batch){
 			depth = (-Position.Y / (MapLimit+1)) + 0.5f;
-			sprBt.Draw(SpriteIndex, Position, rectangle.ToRectangle(), new Color(alpha*2-color.R ,alpha*2-color.G, alpha*2-color.B, alpha*2-255), rot, origin, scale, effect, depth);
+			batch.Draw(SpriteIndex, Position, rectangle.ToRectangle(), new Color(alpha*2-color.R ,alpha*2-color.G, alpha*2-color.B, alpha*2-255), rot, origin, scale, effect, depth);
 		}
 
 		protected virtual void animationImage(int frameNumb){

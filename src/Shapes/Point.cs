@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using static GameBuilder.GameBase;
 
-namespace GameBuilder{
+namespace GameBuilder.Shapes{
 	public class Point : Shape{
 		Vector2 position;
 		int size;
@@ -19,22 +19,22 @@ namespace GameBuilder{
 			this.size = size;
 		}
 
-		public void Draw(SpriteBatch sprBt){
-			sprBt.Draw(Sprite, position, null, color, 0, new Vector2(0.5f, 0.5f), size, SpriteEffects.None, depth);
+		public void Draw(SpriteBatch batch){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), position, null, color, 0, new Vector2(0.5f, 0.5f), size, SpriteEffects.None, depth);
 		}
 
 		#region static
 		
-		public static void Draw(SpriteBatch sprBt, float x, float y, int size, Color color, float depth){
-			sprBt.Draw(Sprite, new Vector2(x, y), null, color, 0, new Vector2(0.5f, 0.5f), size, SpriteEffects.None, depth);
+		public static void Draw(SpriteBatch batch, float x, float y, int size, Color color, float depth){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), new Vector2(x, y), null, color, 0, new Vector2(0.5f, 0.5f), size, SpriteEffects.None, depth);
 		}
 
-		public static void Draw(SpriteBatch sprBt, float x, float y, int size, Color color){
-			sprBt.Draw(Sprite, new Vector2(x, y), null, color, 0, new Vector2(0.5f, 0.5f), size, SpriteEffects.None, 0);
+		public static void Draw(SpriteBatch batch, float x, float y, int size, Color color){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), new Vector2(x, y), null, color, 0, new Vector2(0.5f, 0.5f), size, SpriteEffects.None, 0);
 		}
 
-		public static void Draw(SpriteBatch sprBt, float x, float y){
-			sprBt.Draw(Sprite, new Vector2(x, y), null, Color.White, 0, new Vector2(0.5f, 0.5f), 4, SpriteEffects.None, 0);
+		public static void Draw(SpriteBatch batch, float x, float y){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), new Vector2(x, y), null, Color.White, 0, new Vector2(0.5f, 0.5f), 4, SpriteEffects.None, 0);
 		}
 
 		#endregion

@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static GameBuilder.GameBase;
 
-namespace GameBuilder{
+namespace GameBuilder.Shapes{
 	public class RectangleF : Shape{
 		public float X, Y, Width, Height;
 		public float Top{get => Y;}
@@ -134,37 +133,37 @@ namespace GameBuilder{
 			return new Rectangle(Location.ToPoint(), Size.ToPoint());
 		}
 
-		public void Draw(SpriteBatch sprBt){
-			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+		public void Draw(SpriteBatch batch){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
 		}
-		public void Draw(SpriteBatch sprBt, float depth){
+		public void Draw(SpriteBatch batch, float depth){
 			this.depth = depth;
-			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
 		}
-		public void Draw(SpriteBatch sprBt, Color color){
-			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+		public void Draw(SpriteBatch batch, Color color){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
 		}
-		public void Draw(SpriteBatch sprBt, Color color, float depth){
+		public void Draw(SpriteBatch batch, Color color, float depth){
 			this.depth = depth;
-			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
 		}
 
 		#region static
 		
-		public static void Draw(SpriteBatch sprBt, Vector2 Location, Vector2 Size, Color color, float depth){
-			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
+		public static void Draw(SpriteBatch batch, Vector2 Location, Vector2 Size, Color color, float depth){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, depth);
 		}
 
-		public static void Draw(SpriteBatch sprBt, Vector2 Location, Vector2 Size, Color color){
-			sprBt.Draw(Sprite, Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, 0);
+		public static void Draw(SpriteBatch batch, Vector2 Location, Vector2 Size, Color color){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), Location, null, color, 0, Vector2.Zero, Size, SpriteEffects.None, 0);
 		}
 
-		public static void Draw(SpriteBatch sprBt, float x, float y, float width, float height){
-			sprBt.Draw(Sprite, new Vector2(x, y), null, Color.White, 0, Vector2.Zero, new Vector2(width, height), SpriteEffects.None, 0);
+		public static void Draw(SpriteBatch batch, float x, float y, float width, float height){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), new Vector2(x, y), null, Color.White, 0, Vector2.Zero, new Vector2(width, height), SpriteEffects.None, 0);
 		}
 
-		public static void Draw(SpriteBatch sprBt, float x, float y, float size){
-			sprBt.Draw(Sprite, new Vector2(x, y), null, Color.White, 0, Vector2.Zero, size, SpriteEffects.None, 0);
+		public static void Draw(SpriteBatch batch, float x, float y, float size){
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), new Vector2(x, y), null, Color.White, 0, Vector2.Zero, size, SpriteEffects.None, 0);
 		}
 
 		#endregion

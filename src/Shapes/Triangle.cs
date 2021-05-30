@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameBuilder{
+namespace GameBuilder.Shapes{
 	public class Triangle : Shape{
 		public Vector2[] Vertices;
 		public Color Color;
@@ -93,9 +93,9 @@ namespace GameBuilder{
 			return yValues[0] <= point.Y && point.Y <= yValues[1];
 		}
 
-		public void Draw(SpriteBatch sprBt){
+		public void Draw(SpriteBatch batch){
 			for(int i = 0; i < 3; i++){
-				Line.Draw(sprBt, Vertices[i], Vertices[(i+1)%3], Size, Color, depth);
+				Line.Draw(batch, Vertices[i], Vertices[(i+1)%3], Size, Color, depth);
 			}
 		}
 		public void Draw(GraphicsDevice graphicsDevice){
@@ -115,21 +115,21 @@ namespace GameBuilder{
 
 		#region static
 		
-		public static void Draw(SpriteBatch sprBt, Vector2[] vertices, int size, Color color, float depth){
+		public static void Draw(SpriteBatch batch, Vector2[] vertices, int size, Color color, float depth){
 			for(int i = 0; i < 3; i++){
-				Line.Draw(sprBt, vertices[i], vertices[(i+1)%3], size, color, depth);
+				Line.Draw(batch, vertices[i], vertices[(i+1)%3], size, color, depth);
 			}
 		}
 
-		public static void Draw(SpriteBatch sprBt, Vector2[] vertices, int size, Color color){
+		public static void Draw(SpriteBatch batch, Vector2[] vertices, int size, Color color){
 			for(int i = 0; i < 3; i++){
-				Line.Draw(sprBt, vertices[i], vertices[(i+1)%3], size, color, 0);
+				Line.Draw(batch, vertices[i], vertices[(i+1)%3], size, color, 0);
 			}
 		}
 
-		public static void Draw(SpriteBatch sprBt, Vector2[] vertices){
+		public static void Draw(SpriteBatch batch, Vector2[] vertices){
 			for(int i = 0; i < 3; i++){
-				Line.Draw(sprBt, vertices[i], vertices[(i+1)%3], 4, Color.White, 0);
+				Line.Draw(batch, vertices[i], vertices[(i+1)%3], 4, Color.White, 0);
 			}
 		}
 

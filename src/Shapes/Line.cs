@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static GameBuilder.GameBase;
 
-namespace GameBuilder{
+namespace GameBuilder.Shapes{
 	public class Line : Shape{
 		Vector2[] points;
 		int size;
@@ -35,24 +34,24 @@ namespace GameBuilder{
 			return (Min.X < x && x < Max.X) && (line.Min.X < x && x < line.Max.X);
 		}
 
-		public void Draw(SpriteBatch sprBt){
+		public void Draw(SpriteBatch batch){
 			float lenght = (points[0] - points[1]).Length();
 			float rotation = (float)(-Motion.Angle(points[0], points[1]));
-			sprBt.Draw(Sprite, points[0], null, color, rotation, new Vector2(0, 0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), points[0], null, color, rotation, new Vector2(0, 0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
 		}
 
 		#region static
 
-		public static void Draw(SpriteBatch sprBt, Vector2 point0, Vector2 point1, int size, Color color){
+		public static void Draw(SpriteBatch batch, Vector2 point0, Vector2 point1, int size, Color color){
 			float lenght = (float)(Motion.Distance(point0, point1));
 			float rotation = (float)(-Motion.Angle(point0, point1));
-			sprBt.Draw(Sprite, point0, null, color, rotation, new Vector2(0, 0.5f), new Vector2(lenght, size), SpriteEffects.None, 0);
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), point0, null, color, rotation, new Vector2(0, 0.5f), new Vector2(lenght, size), SpriteEffects.None, 0);
 		}
 
-		public static void Draw(SpriteBatch sprBt, Vector2 point0, Vector2 point1, int size, Color color, float depth){
+		public static void Draw(SpriteBatch batch, Vector2 point0, Vector2 point1, int size, Color color, float depth){
 			float lenght = (float)(Motion.Distance(point0, point1));
 			float rotation = (float)(-Motion.Angle(point0, point1));
-			sprBt.Draw(Sprite, point0, null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
+			batch.Draw(GetDefaultTexture(batch.GraphicsDevice), point0, null, color, rotation, new Vector2(0 ,0.5f), new Vector2(lenght, size), SpriteEffects.None, depth);
 		}
 
 		#endregion

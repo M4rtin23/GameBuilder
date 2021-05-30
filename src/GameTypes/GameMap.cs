@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameBuilder.GameType{
 	public class GameMap : GameBase{
 		protected static SpriteBatch spriteBatch;
-		public virtual Matrix Mat{get => Camera.Follow(new Vector2(0,0));}
+		public virtual Matrix Mat{get => InGame.Camera.Follow(new Vector2(0,0));}
 
 		protected override void Draw(GameTime gameTime){
 			spriteBatch.Begin(transformMatrix: Mat, samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);

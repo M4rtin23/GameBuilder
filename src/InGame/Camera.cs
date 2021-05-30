@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
-using static GameBuilder.GameBase;
+using static GameBuilder.GameType.GameBase;
 
-namespace GameBuilder{
+namespace GameBuilder.InGame{
 	public class Camera{
 		public static Vector2 Position;
 
