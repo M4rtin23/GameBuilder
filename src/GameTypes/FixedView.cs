@@ -2,7 +2,7 @@
 using GameBuilder.Shapes;
 
 namespace GameBuilder.GameType{
-	public class GameBase : Game{
+	public class FixedView : Game{
 		protected static GraphicsDeviceManager graphics;
 		public static int Width{get => graphics.PreferredBackBufferWidth; set {graphics.PreferredBackBufferWidth = value; graphics.ApplyChanges();}}
 		public static int Height{get => graphics.PreferredBackBufferHeight; set {graphics.PreferredBackBufferHeight = value; graphics.ApplyChanges();}}

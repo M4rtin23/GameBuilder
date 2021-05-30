@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static GameBuilder.GameType.GameBase;
+using static GameBuilder.GameType.FixedView;
 using GameBuilder.Shapes;
 namespace GameBuilder.InGame{
 	public class ObjectBuilder{

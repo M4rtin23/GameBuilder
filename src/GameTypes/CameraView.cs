@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameBuilder.GameType{
-	public class GameMap : GameBase{
+	public class CameraView : FixedView{
 		protected static SpriteBatch spriteBatch;
 		public virtual Matrix Mat{get => InGame.Camera.Follow(new Vector2(0,0));}
 

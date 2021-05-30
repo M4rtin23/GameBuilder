@@ -1,5 +1,5 @@
 using Microsoft.Xna.Framework;
-using static GameBuilder.GameType.GameBase;
+using static GameBuilder.GameType.FixedView;
 
 namespace GameBuilder.InGame{
 	public class Camera{
