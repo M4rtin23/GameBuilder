@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameBuilder.Shapes{
 	public class Triangle : Shape{
-		public Vector2[] Vertices;
+		public Vector2[] Vertices = new Vector2[3];
 		public Color Color;
 		public int Size;
 
