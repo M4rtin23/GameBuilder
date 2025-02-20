@@ -106,31 +106,19 @@ namespace GameBuilder.InGame{
 				}
 			}
 		}
-		public static (Vector2, int) GetClosest(ObjectBuilder[] entities, Vector2 position){
+		public static int GetClosest(ObjectBuilder[] entities, Vector2 position){
 			float shortestDistance = -1;
 			int targetDefiner = -1;
 			for (int i = 0; i < entities.Length; i++) {
-				//Sees if the object indexed exists.
-				if (entities[i] == null) {
-					continue;
-				}
-				//Calculates a distance.
-				int enemyDistance = (int)Motion.Distance(entities[i].Position, position);
-				//Compares  
-				if (shortestDistance == -1) {
-					shortestDistance = enemyDistance;               
-				}
-				//Defines the closest.
-				if (enemyDistance <= shortestDistance){
-					shortestDistance = enemyDistance;
-					targetDefiner = i;
+				if (entities[i] != null) {
+					int enemyDistance = (int)Motion.Distance(entities[i].Position, position);
+					if (shortestDistance == -1 || enemyDistance <= shortestDistance){
+						shortestDistance = enemyDistance;
+						targetDefiner = i;
+					}
 				}
 			}
-			if (targetDefiner != -1){
-				return (entities[targetDefiner].Position, targetDefiner);
-			}else{
-				return (new Vector2((float)double.NaN, (float)double.NaN), -1);
-			}
+			return targetDefiner;
 		}
 	}
 }
