@@ -25,6 +25,13 @@ namespace GameBuilder.Shapes{
 			Size = 2;
 		}
 
+		public Triangle(double Theta1, float R1, double Theta2, float R2, double Theta3, float R3){
+			Vertices = new Vector2[]{new Vector2((float)System.Math.Cos(Theta1), (float)System.Math.Sin(Theta1))*R1,
+									 new Vector2((float)System.Math.Cos(Theta2), (float)System.Math.Sin(Theta2))*R2,
+									 new Vector2((float)System.Math.Cos(Theta3), (float)System.Math.Sin(Theta3))*R3};
+			Color = Color.White;
+			Size = 2;
+		}
 		public bool Intersects(Triangle triangle){
 			return linesIntersection(triangle) || IsVertexInside(triangle) || triangle.IsVertexInside(new Triangle(Vertices));
 		}
@@ -115,6 +122,16 @@ namespace GameBuilder.Shapes{
 
 		#region static
 		
+
+		public static Triangle operator +(Triangle self, Vector2 other){
+			Triangle tri = new Triangle(Vector2.Zero, Vector2.Zero, Vector2.Zero);
+
+			for(int i = 0; i < 3; i++){
+				tri.Vertices[i] = self.Vertices[i] + other;
+			}
+			return tri;
+		}
+
 		public static void Draw(SpriteBatch batch, Vector2[] vertices, int size, Color color, float depth){
 			for(int i = 0; i < 3; i++){
 				Line.Draw(batch, vertices[i], vertices[(i+1)%3], size, color, depth);
