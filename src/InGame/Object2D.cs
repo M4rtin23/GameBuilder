@@ -5,50 +5,39 @@ using GameBuilder.Shapes;
 namespace GameBuilder.InGame{
 	public class ObjectBuilder{
 		public Vector2 Position;
-		protected Vector2 speed, acceleration, origin, scale = Vector2.One;
+		protected Vector2 speed, acceleration, scale = Vector2.One;
+		protected Vector2 origin{get => new Vector2(SpriteIndex.Width/(2*frames), SpriteIndex.Height/2);}
 		public Texture2D SpriteIndex;
 		public RectangleF Hitbox = new RectangleF();
 		public RectangleF FastHitbox {get => new RectangleF(Position - origin*scale, rectangle.Size * scale);}
-		protected RectangleF rectangle = new RectangleF();
+		protected RectangleF rectangle{get=> new RectangleF((int)imageIndex*SpriteIndex.Width/frames, 0, SpriteIndex.Width/frames, SpriteIndex.Height);}
 		protected float imageIndex, animationSpeed;
 		protected SpriteEffects effect = SpriteEffects.None;
 		protected float rot = 0, maxSpeed;
 		protected Color color = Color.White;
 		private float depth;
+		protected int frames = 4;
 		protected int alpha = 255;
 
 		public ObjectBuilder(){
 			SpriteIndex = Shape.DefaultTexture;
 		}
-		public ObjectBuilder(Texture2D texture, Vector2 position, RectangleF rectangle, Vector2 origin){
+		public ObjectBuilder(Texture2D texture, Vector2 position){
 			SpriteIndex = texture;
 			Position = position;
-			this.rectangle = rectangle;
-			this.origin = origin;
 		}
 
 		public virtual void Update(){
 			if(!double.IsNaN(speed.X) && !double.IsNaN(speed.Y)){
 				Position += speed += acceleration;
 			}
+			imageIndex += animationSpeed;
+			imageIndex = imageIndex % frames;
 		}
 
 		public virtual void Draw(SpriteBatch batch){
 			depth = (-Position.Y / (MapLimit+1)) + 0.5f;
 			batch.Draw(SpriteIndex, Position, rectangle.ToRectangle(), new Color(alpha*2-color.R ,alpha*2-color.G, alpha*2-color.B, alpha*2-255), rot, origin, scale, effect, depth);
-		}
-
-		protected virtual void animationImage(int frameNumb){
-			imageIndex += animationSpeed;
-			imageIndex = imageIndex % frameNumb;
-		}
-
-		protected virtual void center(int frameNumb){
-			origin = new Vector2(SpriteIndex.Width/(2*frameNumb), SpriteIndex.Height/2);
-		}
-
-		protected virtual void stripSprite(int frameNumb){
-			rectangle = new RectangleF((int)imageIndex*SpriteIndex.Width/frameNumb, 0, SpriteIndex.Width/frameNumb, SpriteIndex.Height);
 		}
 
 		protected bool PreCollision(RectangleF rec){
