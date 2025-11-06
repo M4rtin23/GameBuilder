@@ -43,12 +43,10 @@ namespace GameBuilder.Shapes{
 			triangle1.Draw(batch);
 			triangle2.Draw(batch);
 		}
-		/*public void Draw(GraphicsDevice graphicsDevice){
-			triangle1.Draw(graphicsDevice);
-			triangle2.Draw(graphicsDevice);
-		}*/
 		public void Draw(GraphicsDevice graphicsDevice){
-		VertexPositionColor[] _vertexPositionColors = new VertexPositionColor[4];
+			RasterizerState originalState = graphicsDevice.RasterizerState;
+			graphicsDevice.RasterizerState = RasterizerState.CullNone;
+			VertexPositionColor[] _vertexPositionColors = new VertexPositionColor[4];
 			BasicEffect _basicEffect;
 			for(int i = 0; i < 4; i++){
 				_vertexPositionColors[i] = new VertexPositionColor(new Vector3(Vertices[i], 0), Color);
@@ -58,7 +56,7 @@ namespace GameBuilder.Shapes{
 			_basicEffect.World = Matrix.CreateOrthographicOffCenter(0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height, 0, 0, 1);
 			_basicEffect.CurrentTechnique.Passes[0].Apply();
 		    graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, _vertexPositionColors, 0, 2);
-
+			graphicsDevice.RasterizerState = originalState;
 		}
 	}
 }
