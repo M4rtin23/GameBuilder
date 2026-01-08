@@ -8,14 +8,14 @@ namespace GameBuilder.Shapes{
 		public Color Color;
 		public int Size;
 
-		public RegularPolygon(int vertices, Vector2 position, float radius, float rotation = 0){
+		public RegularPolygon(int vertices, Vector2 position, float radius, float rotation = 0, int size = 2){
 			Vertices = new Vector2[vertices];
 			Position = position;
 			for(int i = 0; i < vertices; i++){
 				Vertices[i] = new Vector2((float)System.Math.Cos(System.Math.Tau/vertices*i+rotation), (float)System.Math.Sin(System.Math.Tau/vertices*i+rotation))*radius;
 			}
 			Color = Color.White;
-			Size = 2;
+			Size = size;
 		}
 
 
