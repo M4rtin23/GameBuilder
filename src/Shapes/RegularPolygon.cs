@@ -30,18 +30,19 @@ namespace GameBuilder.Shapes{
 		public void Draw(GraphicsDevice graphicsDevice){
 			RasterizerState originalState = graphicsDevice.RasterizerState;
 			graphicsDevice.RasterizerState = RasterizerState.CullNone;
-			VertexPositionColor[] _vertexPositionColors = new VertexPositionColor[Vertices.Length*3];
+			VertexPositionColor[] _vertexPositionColors = new VertexPositionColor[Vertices.Length];
 			BasicEffect _basicEffect;
-			for(int i = 0; i < Vertices.Length; i++){
-				_vertexPositionColors[3*i] = new VertexPositionColor(new Vector3(Position, 0), Color);
-				_vertexPositionColors[3*i+1] = new VertexPositionColor(new Vector3(Position+Vertices[i], 0), Color);
-				_vertexPositionColors[3*i+2] = new VertexPositionColor(new Vector3(Position+Vertices[(i+1)%Vertices.Length], 0), Color);
+			for(int i = 0; i < Vertices.Length; i+=2){
+				_vertexPositionColors[i] = new VertexPositionColor(new Vector3(Position+Vertices[i/2], 0), Color);
+			}
+			for(int i = 1; i < Vertices.Length; i+=2){
+				_vertexPositionColors[i] = new VertexPositionColor(new Vector3(Position+Vertices[((Vertices.Length-(i+1)/2))%Vertices.Length], 0), Color);
 			}
 			_basicEffect = new BasicEffect(graphicsDevice);
 			_basicEffect.VertexColorEnabled = true;
 			_basicEffect.World = Matrix.CreateOrthographicOffCenter(0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height, 0, 0, 1);
 			_basicEffect.CurrentTechnique.Passes[0].Apply();
-		    graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, _vertexPositionColors, 0, Vertices.Length);
+		    graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, _vertexPositionColors, 0, Vertices.Length-2);
 			graphicsDevice.RasterizerState = originalState;
 		}
 	}
