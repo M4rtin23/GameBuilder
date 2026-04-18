@@ -10,13 +10,13 @@ namespace GameBuilder.InGame{
 		public Texture2D SpriteIndex;
 		public RectangleF Hitbox = new RectangleF();
 		public RectangleF FastHitbox {get => new RectangleF(Position - origin*scale, rectangle.Size * scale);}
-		protected RectangleF rectangle{get=> new RectangleF((int)imageIndex*SpriteIndex.Width/frames, 0, SpriteIndex.Width/frames, SpriteIndex.Height);}
-		protected float imageIndex, animationSpeed;
+		protected RectangleF rectangle{get=> new RectangleF((int)imageIndex*SpriteIndex.Width/frames, animationIndex*SpriteIndex.Height/animations, SpriteIndex.Width/frames, SpriteIndex.Height);}
+		protected float imageIndex, animationSpeed, animationIndex;
 		protected SpriteEffects effect = SpriteEffects.None;
 		protected float rot = 0, maxSpeed;
 		protected Color color = Color.White;
 		private float depth;
-		protected int frames = 4;
+		protected int frames = 4, animations;
 		protected int alpha = 255;
 
 		public ObjectBuilder(){
