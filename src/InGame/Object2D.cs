@@ -16,7 +16,7 @@ namespace GameBuilder.InGame{
 		protected float rot = 0, maxSpeed;
 		protected Color color = Color.White;
 		private float depth;
-		protected int frames = 4, animations;
+		protected int frames = 4, animations = 1;
 		protected int alpha = 255;
 
 		public ObjectBuilder(){
