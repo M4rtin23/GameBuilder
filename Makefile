@@ -4,7 +4,7 @@ PROJECT_NAME = "GameBuilder"
 DIR = .
 
 $(PROJECT_NAME).csproj:
-	@echo $(CONTENT) > $(PROJECT_NAME).csproj
+	@echo -e $(CONTENT) > $(PROJECT_NAME).csproj
 	dotnet add package Monogame.Framework.DesktopGL
 
 install: $(PROJECT_NAME).csproj
