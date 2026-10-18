@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using static GameBuilder.GameType.FixedView;
 using GameBuilder.Shapes;
 namespace GameBuilder.InGame{
-	public class ObjectBuilder{
+	public class ObjectBuilder : IEntity{
 		public Vector2 Position;
 		protected Vector2 speed, acceleration, scale = Vector2.One;
 		protected Vector2 origin{get => new Vector2(SpriteIndex.Width/(2*frames), SpriteIndex.Height/2);}
