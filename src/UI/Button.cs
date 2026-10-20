@@ -1,0 +1,32 @@
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using GameBuilder.Shapes;
+
+namespace GameBuilder.UI{
+	public class Button:UIElement{
+		public RectangleF Hitbox{get => new RectangleF(position.X, position.Y,128,32);}
+		protected int transparency = 0;
+		public Action Action;
+
+		public Button(string name, Action action){
+			this.Action = action;
+			this.name = name;
+		}
+
+		public override void Update(float x, float y){
+			position = new Vector2(x, y);
+			if (Hitbox.Contains(MouseHandler.Position)){
+				transparency = 64;
+				MouseHandler.Click(Action);
+			}
+			else{
+				transparency = 0;
+			}
+		}
+		public override void Draw(SpriteBatch batch){
+			Hitbox.Draw(batch, new Color(transparency, transparency, transparency, transparency));
+			batch.DrawString(GameResources.Font, name, position, Color.White);
+		}
+	}
+}
