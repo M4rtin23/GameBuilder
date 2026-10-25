@@ -7,6 +7,7 @@ namespace GameBuilder.GameType{
 		public static int Width{get => graphics.PreferredBackBufferWidth; set {graphics.PreferredBackBufferWidth = value; graphics.ApplyChanges();}}
 		public static int Height{get => graphics.PreferredBackBufferHeight; set {graphics.PreferredBackBufferHeight = value; graphics.ApplyChanges();}}
 		public static bool IsFullscreen{get => graphics.IsFullScreen; set {graphics.IsFullScreen = value; graphics.ApplyChanges();}}
+		public static GameBuilder.Screens.Screen Screen;
 		public static int MapLimit = 5000;
 
 		protected override void Initialize(){
