@@ -8,17 +8,10 @@ namespace GameBuilder.GameType{
 		public static int Height{get => graphics.PreferredBackBufferHeight; set {graphics.PreferredBackBufferHeight = value; graphics.ApplyChanges();}}
 		public static bool IsFullscreen{get => graphics.IsFullScreen; set {graphics.IsFullScreen = value; graphics.ApplyChanges();}}
 		public static GameBuilder.Screens.Screen Screen;
-		public static int MapLimit = 5000;
 
 		protected override void Initialize(){
 			Shape.CreateTexture(GraphicsDevice);
 			base.Initialize();
-		}
-		public static bool IsInside(Vector2 position){
-			return new RectangleF(MapLimit).Contains(position);
-		}
-		public static bool IsInside2(Vector2 position){
-			return new RectangleF(0, 0, MapLimit).Contains(position);
 		}
 	}
 }

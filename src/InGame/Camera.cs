@@ -18,7 +18,7 @@ namespace GameBuilder.InGame{
 			return Matrix.CreateTranslation(-Position.X, -Position.Y, 0) * Matrix.CreateTranslation(Width/2, Height/2, 0);
 		}
 
-		public static Matrix LimitedFollow(Vector2 position){
+		public static Matrix LimitedFollow(Vector2 position, int MapLimit){
 			if(position.X < (MapLimit-Width)/2 && position.X > (-MapLimit+Width)/2)
 			Position.X = position.X;
 			if(position.Y < (MapLimit-Height)/2 && position.Y > (-MapLimit+Height)/2)

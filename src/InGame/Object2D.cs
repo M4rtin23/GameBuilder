@@ -36,7 +36,7 @@ namespace GameBuilder.InGame{
 		}
 
 		public virtual void Draw(SpriteBatch batch){
-			depth = (-Position.Y / (MapLimit+1)) + 0.5f;
+			depth = (float)(System.Math.Atan(-Position.Y/50)/System.Math.PI)+0.5f;
 			batch.Draw(SpriteIndex, Position, rectangle.ToRectangle(), new Color(alpha*2-color.R ,alpha*2-color.G, alpha*2-color.B, alpha*2-255), rot, origin, scale, effect, depth);
 		}
 
